@@ -1,5 +1,4 @@
-// control.go
-package main
+package cmd
 
 import (
 	"github.com/stianeikeland/go-rpio"
