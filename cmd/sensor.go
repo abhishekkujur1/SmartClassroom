@@ -5,15 +5,18 @@ import (
 	"log"
 	"time"
 
+	// Real GPIO library (only works on Raspberry Pi)
 	"github.com/stianeikeland/go-rpio"
 )
 
+// GPIO pin numbers for Raspberry Pi (BCM)
 const (
-	TriggerPin         = 17 // GPIO17 (BCM pin)
-	EchoPin            = 27 // GPIO27 (BCM pin)
-	DistanceThreshold  = 200.0 // 2 meters in cm
+	TriggerPin        = 17 // GPIO17 (BCM)
+	EchoPin           = 27 // GPIO27 (BCM)
+	DistanceThreshold = 200.0 // 2 meters in cm
 )
 
+// InitSensor initializes the GPIO pins
 func InitSensor() error {
 	if err := rpio.Open(); err != nil {
 		return err
@@ -23,10 +26,12 @@ func InitSensor() error {
 	return nil
 }
 
+// CloseSensor releases the GPIO resources
 func CloseSensor() {
 	rpio.Close()
 }
 
+// MeasureDistance measures the distance using an ultrasonic sensor
 func MeasureDistance() float64 {
 	trigger := rpio.Pin(TriggerPin)
 	echo := rpio.Pin(EchoPin)
