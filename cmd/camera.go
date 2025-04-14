@@ -177,7 +177,7 @@ func ImageCapture() error {
 
 	// Save image to file
 	filename := fmt.Sprintf("capture_%s.raw", time.Now().Format("20060102_150405"))
-	if err := os.WriteFile(filename, imgData, 0644); err != nil {
+	if err := os.WriteFile(filename, imgData, 0o644); err != nil {
 		return fmt.Errorf("failed to save image: %v", err)
 	}
 

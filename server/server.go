@@ -6,13 +6,7 @@ import (
 	"net/http"
 )
 
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Smart Attendence Server is running!\n")
-}
-
 func StartServer() {
-	http.HandleFunc("/health", healthHandler)
-
 	port := ":8080"
 	fmt.Printf("Starting server on port %s\n", port)
 
@@ -20,4 +14,3 @@ func StartServer() {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 }
-
