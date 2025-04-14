@@ -1,4 +1,3 @@
-// control.go
 package cmd
 
 import (

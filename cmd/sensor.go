@@ -1,11 +1,9 @@
-// sensor.go
 package cmd
 
 import (
 	"log"
 	"time"
 
-	// Real GPIO library (only works on Raspberry Pi)
 	"github.com/stianeikeland/go-rpio"
 )
 
@@ -63,4 +61,41 @@ func MeasureDistance() float64 {
 	distance := duration * 17150 // cm
 
 	return distance
+}
+
+func StartCapture() {
+	// Initialize the sensor
+	if err := InitSensor(); err != nil {
+		log.Fatalf("Failed to initialize sensor: %v", err)
+	}
+	defer CloseSensor()
+
+	// Initialize the camera
+	if err := InitCamera(); err != nil {
+		log.Fatalf("Failed to initialize camera: %v", err)
+	}
+	defer CloseCamera()
+
+	// Continuously measure distance
+	for {
+		distance := MeasureDistance()
+		if distance < 0 {
+			log.Println("Invalid distance measurement")
+			continue
+		}
+
+		log.Printf("Distance: %.2f cm", distance)
+
+		// Call imageCapture when distance is less than 2 meters
+		if distance < DistanceThreshold {
+			if err := ImageCapture(); err != nil {
+				log.Printf("Failed to capture image: %v", err)
+			} else {
+				log.Println("Image captured successfully")
+			}
+		}
+
+		// Small delay to avoid overwhelming the sensor
+		time.Sleep(1 * time.Second)
+	}
 }
