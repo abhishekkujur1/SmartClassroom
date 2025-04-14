@@ -1,5 +1,5 @@
 // camera.go
-package main
+package cmd
 
 import (
 	"fmt"

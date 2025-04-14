@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"gocv.io/x/gocv"
 )
 
-func main() {
+func StartSensors() {
 	// Initialize ultrasonic sensor
 	if err := InitSensor(); err != nil {
 		fmt.Println("❌ Failed to initialize sensor:", err)
@@ -52,10 +52,10 @@ func main() {
 			window.IMShow(img)
 
 			// Static name for now - replace with face recognition later
-			err = MarkAttendance("Student1")
-			if err != nil {
-				fmt.Println("❌ Attendance error:", err)
-			}
+			// err = MarkAttendance("Student1")
+			// if err != nil {
+			// 	fmt.Println("❌ Attendance error:", err)
+			// }
 		} else {
 			TurnOffFan()
 			TurnOffLight()

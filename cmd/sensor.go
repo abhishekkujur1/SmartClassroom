@@ -1,5 +1,5 @@
 // sensor.go
-package main
+package cmd
 
 import (
 	"log"
@@ -11,8 +11,8 @@ import (
 
 // GPIO pin numbers for Raspberry Pi (BCM)
 const (
-	TriggerPin        = 17 // GPIO17 (BCM)
-	EchoPin           = 27 // GPIO27 (BCM)
+	TriggerPin        = 17    // GPIO17 (BCM)
+	EchoPin           = 27    // GPIO27 (BCM)
 	DistanceThreshold = 200.0 // 2 meters in cm
 )
 
